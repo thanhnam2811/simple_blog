@@ -1,0 +1,23 @@
+<div class='d-flex flex-column h-100'>
+	<div class="title-container px-0 pb-2 d-flex justify-content-between">
+		<h1>Danh sách các bài viết</h1>
+		<div class="d-flex align-items-center">
+			<a href="posts/new" role="button" class="btn btn-outline-primary">Thêm bài viết mới</a>
+		</div>
+	</div>
+
+	<div class="list-group p-0 flex-grow-1 overflow-auto">
+		{{#each listPost}}
+		<div class="my-1 rounded">
+
+			<a href="posts/{{this.id}}" class="list-group-item list-group-item-action" aria-current="true">
+				<div class="d-flex w-100 justify-content-between">
+					<h5 class="mb-1">{{this.title}}</h5>
+					<small>{{this.timeAgo}}</small>
+				</div>
+				<p class="mb-1 text-overflow-ellipsis">{{this.content}}</p>
+			</a>
+		</div>
+		{{/each}}
+	</div>
+</div>

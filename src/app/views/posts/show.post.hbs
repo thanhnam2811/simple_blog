@@ -1,0 +1,86 @@
+<div class="row h-100">
+
+	<div class="col col-12 col-md-7">
+		<div class="post-container">
+			<div class="title-container d-flex justify-content-between">
+				<h1>{{post.title}}</h1>
+
+				<div class="post-action d-flex align-items-center gap-2">
+					<a href="{{post.id}}/edit" role="button" class="btn btn-outline-warning">Chỉnh sửa</a>
+					<button data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
+						class="btn btn-outline-danger">Xóa
+						bài viết</button>
+				</div>
+			</div>
+
+			<p>{{post.content}}</p>
+		</div>
+	</div>
+
+	<div class="col col-12 col-md-5">
+		<div class="comment-container d-flex flex-column h-100">
+			<div class="comment-header">
+				<h3>
+					Bình luận ({{listComment.length}})
+				</h3>
+			</div>
+
+			<div class="list-group p-0 comment-container flex-grow-1 overflow-auto">
+				{{#each listComment}}
+				<div class="my-1 ">
+					<li class="list-group-item list-group-item-action rounded" aria-current="true">
+						<div class="d-flex w-100 justify-content-between">
+							<h5 class="mb-1">
+								{{this.name}}
+							</h5>
+							<small>{{this.timeAgo}}</small>
+						</div>
+						<p class="mb-1">{{this.content}}</p>
+					</li>
+				</div>
+				{{/each}}
+			</div>
+
+			<div class="comment-new">
+				<h3>Bình luận mới</h3>
+				<form action="{{post.id}}/comments/new" method="post">
+					<div class="mb-3">
+						<label for="name" class="form-label">Tên hiển thị</label>
+						<input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên hiển thị"
+							required>
+					</div>
+					<div class="mb-3">
+						<label for="content" class="form-label">Nội dung bình luận</label>
+						<textarea class="form-control" id="content" name="content" rows="3"
+							placeholder="Nhập nội dung bình luận" required></textarea>
+					</div>
+					<div class="mb-3">
+						<input type="submit" value="Bình luận" class="btn btn-outline-primary float-end" />
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="confirmDeleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">Xóa bài viết?</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p>Bài viết và tất cả bình luận sẽ bị xóa và không thể hoàn tác!!!</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+					<a role="button" href="/posts/{{post.id}}/delete" class="btn btn-danger">Xóa</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
